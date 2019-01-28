@@ -2,7 +2,7 @@ APP=supercoo
 PRG=$(APP).prg
 D64=$(APP).d64
 LST=$(APP).lst
-SOURCES=main.s data/addr_defs.s data/sprites.s engine/gfx.s engine/screen.s
+SOURCES=main.s data/addr_defs.s data/sprites.s engine/input.s engine/gfx.s engine/screen.s
 
 .PHONY: all d64 clean
 

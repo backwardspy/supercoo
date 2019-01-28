@@ -38,8 +38,16 @@ entry           lda $0001       ; switch out basic rom to free $A000 - $BFFF for
 
                 jsr gfx.init_pigeon
 
-                jmp *
+mainloop
+-               ldx #$FF        ; TEMPORARY vsync, to be replaced with raster interrupt
+                cpx $d012
+                bne -
 
+                jsr input.check_keys
+
+                jmp mainloop
+
+input           .binclude "engine/input.s"
 screen          .binclude "engine/screen.s"
 gfx             .binclude "engine/gfx.s"
 
