@@ -28,11 +28,6 @@ init_pigeon     lda #spr_addr(pigeon_spr)
                 and #$F         ; mask colour bits
                 sta $D027       ; store sprite 0 colour
 
-                lda #148        ; x coordinate
-                sta $D000
-                lda #90         ; y coordinate
-                sta $D001
-
                 lda #1          ; enable sprite 0
                 sta $D015
 _nomulti

@@ -45,10 +45,13 @@ mainloop
 
                 jsr input.check_keys
 
+                jsr mobs.update
+
                 jmp mainloop
 
 input           .binclude "engine/input.s"
 screen          .binclude "engine/screen.s"
 gfx             .binclude "engine/gfx.s"
+mobs            .binclude "engine/mobs.s"
 
 #reserve_check "Program code", $BFFF

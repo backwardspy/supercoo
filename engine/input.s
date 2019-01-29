@@ -27,62 +27,24 @@ check_keys
                 lda #%00000000
                 sta DDRB
 
-                lda #%11111101
-                sta PRA
-                lda PRB
-                and #%00100000
-                beq crouch
+                ;; lda #%11111101  ; S
+                ;; sta PRA
+                ;; lda PRB
+                ;; and #%00100000
+                ;; beq crouch
 
-                ;; lda #gfx.spr_addr(pigeon_spr, 0)
-                ;; sta gfx.PTR_BASE ; we're not crouching
-
-                lda #%11111011
+                lda #%11111011  ; D
                 sta PRA
                 lda PRB
                 and #%00000100
-                beq move_right
+                beq mobs.ply_moveright
 
-                lda #%11111101
+                lda #%11111101  ; A
                 sta PRA
                 lda PRB
                 and #%00000100
-                beq move_left
+                beq mobs.ply_moveleft
+
+                jsr mobs.ply_stop ; getting here means player isn't pressing A or D
 
                 rts
-
-crouch          lda #gfx.spr_addr(pigeon_spr, 4)
-                sta gfx.PTR_BASE
-                rts
-
-;;; THIS IS ALL EXPERIMENTAL
-;;; MOVEMENT WILL BE SUPER WEIRD UNTIL I FIX THIS
-move_right      lda $D000
-                adc 2
-                sta $D000
-                bcc +
-                lda #1
-                eor $D010       ; flip sprite 0's X MSB
-                sta $D010
-+
-                ldx frame
-                inx
-                cpx #8
-                bne +
-
-                ldx #0
-                lda #1
-                eor $47f8
-                sta $47f8
-+
-                stx frame
-                rts
-
-move_left       clc
-                dec $D000
-                bcc +
-                lda #1
-                eor $D010       ; flip sprite 0's X MSB
-+               rts
-
-
-frame .byte 0

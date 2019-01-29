@@ -1,8 +1,9 @@
 BASE = VIC_BANK + $0400         ; text ram base addr
 COLR = $D800                    ; colour ram base addr
 
-init            ldx #0
+init            ldx #5
                 stx $d020
+                ldx #1
                 stx $d021
 
 clear           lda #$20        ; space char
